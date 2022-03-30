@@ -29,7 +29,7 @@ tags: #workshop #aks #github #terraform
 - <a href='https://github.com/FrenchBarbusCorp/Workshop-Terraform-AKS-2days/tree/main/Terraform/Lab6_Azure_Kubernetes_Service'>Lab 6 : Déploiement Azure Kubernetes Service </a>
 
 ### Après midi
-- Rappels sur les deploiements Kubernetes : (YAML, Helm) et pipelines
+- Rappels sur les déploiements Kubernetes : (YAML, Helm) et pipelines
 - Focus/explication sur les Pipelines de Build 
 - <a href='https://github.com/FrenchBarbusCorp/Workshop-Terraform-AKS-2days/tree/main/Pipelines/Lab7_Pipeline_de_Build'>Lab 7 : Pipeline de build (CI) d'une application conteneurisée </a>
 - Focus/explication Pipeline de release
@@ -41,18 +41,17 @@ tags: #workshop #aks #github #terraform
 ---
 ## Pré requis
 
-### Avoir un environnement Bash 
-- Pour ceux sous Windows 10/11 : Installation WSL2 https://docs.microsoft.com/en-us/windows/wsl/install
+### Avoir un abonnement (subscription Azure) et les privilèges administrator
 
-### Avoir les outils suivants : 
-- git
-- Azure CLI -> https://docs.microsoft.com/fr-fr/cli/azure/install-azure-cli-linux?pivots=apt (test: ~$  az Login)
-- terraform -> https://learn.hashicorp.com/tutorials/terraform/install-cli (test : ~$ terraform)
-- kubectl -> https://kubernetes.io/docs/tasks/tools/#kubectl
-- Visual Studio Code -> https://code.visualstudio.com
-- Extension Terraform pour VSCode -> Depuis le bash, exécuter « code . » et aller chercher l’extension « Hashicorp Terraform »
+**/!\ L'ensemble des Labs peuvent être faits en utilisant Azure Cloud Shell.**
+
+Informations complémentaires sur Azure Cloud Shell : https://docs.microsoft.com/en-us/azure/cloud-shell/overview 
 
 ## Créer une clé SSH (si vous n'en avez pas déjà)
+
+Ouvrir un Azure Cloud Shell. Si c'est la première utilisation d'Azure Cloud Shell, valider la création d'un compte de stockage (qui contiendra les données du profil).
+
+se placer sur le répertoire home :    cd
 
 ssh-keygen -t rsa 
 
@@ -71,7 +70,7 @@ Récupérer le output de la commande et le sauvegarder temporairement dans un fi
 
 ---
 
-## Forker ce repo
+## Forker le repo du workshop
 
 Ouvrir un navigateur Web et se connecter sur github.com avec un identifiant
 
@@ -83,7 +82,7 @@ Cliquer le bouton Fork
 
 le repo est forké dans votre environnement github
 
-Mettre la clé SSH dans les paramètres du compte github
+Mettre la clé SSH (la partie publique dans le fichier id_rsa.pub) dans les paramètres du compte github
 
 <img width='300' src='https://github.com/FrenchBarbusCorp/Workshop-Terraform-AKS-2days/blob/main/images/lab0-ssh1.jpg'/> 
 
@@ -98,4 +97,26 @@ Mettre la clé SSH dans les paramètres du compte github
 <img width='800' src='https://github.com/FrenchBarbusCorp/Workshop-Terraform-AKS-2days/blob/main/images/lab0-gitclone2.jpg'/>
 
 
+
+## Installation des composants nécessaires pour travailler sur un poste local
+
+### Avoir un environnement Bash 
+- Pour ceux sous Windows 10/11 : Installation WSL2 https://docs.microsoft.com/en-us/windows/wsl/install
+
+### Avoir les outils suivants installés dans WSL : 
+- git -> https://git-scm.com/book/en/v2/Getting-Started-Installing-Git 
+- Azure CLI -> https://docs.microsoft.com/fr-fr/cli/azure/install-azure-cli-linux?pivots=apt (test: ~$  az Login)
+- terraform -> https://learn.hashicorp.com/tutorials/terraform/install-cli (test : ~$ terraform)
+
+Procédure d'installation de la CLI Terraform pour Linux (WSL Ubuntu 20.04)
+```
+sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+sudo apt-get update && sudo apt-get install terraform
+```
+
+- kubectl -> https://kubernetes.io/docs/tasks/tools/#kubectl
+- Visual Studio Code -> https://code.visualstudio.com
+- Extension Terraform pour VSCode -> Depuis le bash, exécuter « code . » et aller chercher l’extension « Hashicorp Terraform »
 
